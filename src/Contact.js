@@ -4,7 +4,7 @@ export default function Contact() {
 	const [count, setCount] = useState(() => 0)
 	const [numberDirection, setNumberDirection] = useState(() => "N/A")
 
-	const[resourceType, setResourceType] = useState('posts')
+	const[resourceType, setResourceType] = useState('pikachu')
 	const [items, setItems] = useState([])
 
 	function decrementCount() {
@@ -22,7 +22,8 @@ export default function Contact() {
 	useEffect(() => {
 		fetch(`https://pokeapi.co/api/v2/pokemon/${resourceType}`)
 		.then(response => response.json())
-		.then(json => setItems(json))
+		//.then(json => console.log(json))
+		.then(json => setItems(json.abilities))
 	},[resourceType])
 
 	return (
@@ -43,10 +44,12 @@ export default function Contact() {
 			<button onClick={() => setResourceType('bulbasaur')} class="bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">Bulbasaur</button>
 			<button onClick={() => setResourceType('charmander')} class="bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded">Charmander</button>
 		</div>
-		<h1>{resourceType}</h1>
-		{items.map(item => {
-			return <pre>{JSON.stringify(item)}</pre>
-		})}
+		<h1 class="mt-12 mb-4 text-4xl text-center">{resourceType}</h1>
+		<div class="mx-auto w-4/5">
+			{items.map(item => {
+			return <pre class="flex justify-center">{JSON.stringify(item)}</pre>
+			})}
+		</div>
 		</>
 	)
 }
