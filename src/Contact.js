@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react';
+import FunctionContextComponent  from './FunctionContextComponent';
+import { ThemeProvider } from './ThemeContext'
 
 export default function Contact() {
 	const [count, setCount] = useState(() => 0)
@@ -44,11 +46,16 @@ export default function Contact() {
 			<button onClick={() => setResourceType('bulbasaur')} class="bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">Bulbasaur</button>
 			<button onClick={() => setResourceType('charmander')} class="bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded">Charmander</button>
 		</div>
-		<h1 class="mt-12 mb-4 text-4xl text-center">{resourceType}</h1>
+		<h2 class="mt-12 mb-4 text-2xl text-center">{resourceType}</h2>
 		<div class="mx-auto w-4/5">
 			{items.map(item => {
 			return <pre class="flex justify-center">{JSON.stringify(item)}</pre>
 			})}
+		</div>
+		<div class="mx-auto w-4/5">
+			<ThemeProvider>
+				<FunctionContextComponent />
+			</ThemeProvider>
 		</div>
 		</>
 	)
